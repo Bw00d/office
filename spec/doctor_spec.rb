@@ -46,11 +46,13 @@ describe Doctor do
       test_doc.patients.should eq [test_patient]
     end
   end
-  # describe '#delete_patient' do
-  #   it 'removes a patient from the patients array' do
-  #     test_doc = Doctor.new({:name => "Dr. Spock", :specialty_id => 7})
-  #     test_patient = test_doc.add_patient({:name => "Baby Boy", :birthdate => '1940-01-01'})
-  #     test_doc.patients.should eq [test_patient]
-    #   end
-    # end
+  describe '#delete_patient' do
+    it 'removes a patient from the patients array' do
+      test_doc = Doctor.new({:name => "Dr. Spock", :specialty_id => 7})
+      test_patient = test_doc.add_patient({:name => "Baby Boy", :birthdate => '1940-01-01'})
+      test_patient2 = test_doc.add_patient({:name => "Baby Girl", :birthdate => '1940-02-01'})
+      test_doc.delete_patient(test_patient2)
+      test_doc.patients.should eq [test_patient]
+      end
+    end
 end

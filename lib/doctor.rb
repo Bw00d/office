@@ -36,4 +36,8 @@ class Doctor
     new_patient
   end
 
+  def delete_patient(another_patient)
+    @patients.delete_if {|patient| patient == another_patient}
+  end
+
 end
