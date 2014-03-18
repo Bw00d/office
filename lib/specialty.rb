@@ -26,4 +26,13 @@ class Specialty
     self.field == another_specialty.field && self.doc_id == another_specialty.doc_id && self.id == another_specialty.id
   end
 
+  def self.doc_list(field_to_select)
+    doctors_in_specialty = []
+    results = DB.exec("SELECT * FROM specialties WHERE field = '#{field_to_select}';")
+    results.each do |result|
+      p result
+      doctors_in_specialty << result['doc_id'].to_i
+    end
+    doctors_in_specialty
+  end
 end

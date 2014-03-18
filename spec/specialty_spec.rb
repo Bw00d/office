@@ -36,7 +36,17 @@ describe Specialty do
     end
   end
 
-
+  describe '.doc_list' do
+    it 'should return a list of doctors ids with given specialty' do
+      test_specialty1 = Specialty.new({:field => "Hip Hop", :doc_id => 2})
+      test_specialty2 = Specialty.new({:field => "Hip Hop", :doc_id => 1})
+      test_specialty3 = Specialty.new({:field => "Geriatrics", :doc_id => 3})
+      test_specialty1.save
+      test_specialty2.save
+      test_specialty3.save
+      Specialty.doc_list("Hip Hop").should eq [2,1]
+    end
+  end
 end
 
 
