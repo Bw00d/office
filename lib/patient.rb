@@ -11,7 +11,6 @@ class Patient
     results = DB.exec("SELECT * FROM patients;")
     patients = []
     results.each do |result|
-      p result
       name = result['name']
       id   = result['id'].to_i
       patients << Patient.new({:name => name, :id => id})

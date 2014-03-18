@@ -40,5 +40,10 @@ describe Doctor do
       test_doc.add_patient({:name => "Baby Boy"})
       Patient.all[0].should be_an_instance_of Patient
     end
+    it 'adds the patient the the doctors patients array' do
+      test_doc = Doctor.new({:name => "Dr. Spock", :specialty_id => 7})
+      test_patient = test_doc.add_patient({:name => "Baby Boy"})
+      test_doc.patients.should eq [test_patient]
+    end
   end
 end

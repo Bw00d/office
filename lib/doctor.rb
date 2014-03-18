@@ -1,11 +1,12 @@
 class Doctor
 
-  attr_reader :name, :specialty_id, :id
+  attr_reader :name, :specialty_id, :id, :patients
 
   def initialize(attributes)
     @name = attributes[:name]
     @specialty_id = attributes[:specialty_id]
     @id = attributes[:id]
+    @patients = []
   end
 
   def self.all
@@ -27,6 +28,12 @@ class Doctor
 
   def ==(another_doctor)
     self.name == another_doctor.name && self.id == another_doctor.id && self.specialty_id == another_doctor.specialty_id
+  end
+
+  def add_patient(attributes)
+    new_patient = Patient.create(attributes)
+    patients << new_patient
+    new_patient
   end
 
 end
