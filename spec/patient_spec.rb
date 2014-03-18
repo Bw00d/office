@@ -6,9 +6,10 @@ describe Patient do
       test_patient = Patient.new({:name =>"Sybil Doe"})
       test_patient.should be_an_instance_of Patient
     end
-    it 'gives a patient a name' do
-      test_patient = Patient.new({:name =>"Sylvia"})
+    it 'gives a patient a name and birthdate' do
+      test_patient = Patient.new({:name =>"Sylvia", :birthdate => '1940-01-01'})
       test_patient.name.should eq "Sylvia"
+      test_patient.birthdate.should eq '1940-01-01'
     end
   end
   describe '.all' do
