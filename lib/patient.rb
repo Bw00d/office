@@ -1,11 +1,12 @@
 class Patient
 
-  attr_reader :name, :id, :birthdate
+  attr_reader :name, :id, :birthdate, :doc_id
 
   def initialize(attributes)
     @name = attributes[:name]
     @id = attributes[:id]
     @birthdate = attributes[:birthdate]
+    @doc_id = attributes[:doc_id]
   end
 
   def self.all
@@ -14,8 +15,9 @@ class Patient
     results.each do |result|
       name = result['name']
       id   = result['id'].to_i
+      doc_id = result['doc_id'].to_i
       birthdate = result['birthdate']
-      patients << Patient.new({:name => name, :id => id, :birthdate => birthdate})
+      patients << Patient.new({:name => name, :id => id, :birthdate => birthdate, :doc_id => doc_id})
     end
   patients
   end
@@ -27,7 +29,7 @@ class Patient
   end
 
   def save
-    result = DB.exec("INSERT INTO patients (name, birthdate) VALUES ('#{@name}', '#{@birthdate}') RETURNING id;")
+    result = DB.exec("INSERT INTO patients (name, birthdate, doc_id) VALUES ('#{@name}', '#{@birthdate}', '#{@doc_id}') RETURNING id;")
     @id = result.first['id'].to_i
   end
 
@@ -38,10 +40,11 @@ class Patient
   def modify(attributes)
     @name =  attributes[:name].nil? ? @name : attributes[:name]
     @birthdate = attributes[:birthdate].nil? ? @birthdate : attributes[:birthdate]
+    @doc_id = attributes[:doc_id].nil? ? @doc_id : attributes[:doc_id]
     updated = DB.exec("UPDATE patients SET name = '#{@name}' WHERE id = #{@id};")
   end
 
   def ==(another_patient)
-    self.name == another_patient.name && self.id == another_patient.id && self.birthdate == another_patient.birthdate
+    self.name == another_patient.name && self.id == another_patient.id && self.birthdate == another_patient.birthdate && self.doc_id == another_patient.doc_id
   end
 end

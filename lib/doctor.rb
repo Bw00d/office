@@ -31,13 +31,14 @@ class Doctor
   end
 
   def add_patient(attributes)
+    attributes[:doc_id] = @id
     new_patient = Patient.create(attributes)
     patients << new_patient
     new_patient
   end
 
-  def delete_patient(another_patient)
-    @patients.delete_if {|patient| patient == another_patient}
+  def delete_patient(patient_to_delete)
+    @patients.delete_if {|patient| patient == patient_to_delete}
   end
 
 end
