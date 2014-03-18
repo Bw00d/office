@@ -32,6 +32,14 @@ describe Patient do
     end
   end
 
+  describe'#delete' do
+    it 'removes a patient from the database' do
+      test_patient = Patient.create({:name => "Sylvia", :birthdate => '1940-01-01'})
+      test_patient.delete
+      Patient.all.should eq []
+    end
+  end
+
   describe '#==' do
     it 'compares two patients to see if they have the same name and id' do
       test_patient1 = Patient.new({:name => "Sylvia", :birthdate => '1940-01-01', :id => 1})
