@@ -37,12 +37,12 @@ describe Doctor do
   describe '#add_patient' do
     it 'creates an instance of Patient' do
       test_doc = Doctor.new({:name => "Dr. Spock", :specialty_id => 7})
-      test_doc.add_patient({:name => "Baby Boy"})
+      test_doc.add_patient({:name => "Baby Boy", :birthdate => '1940-01-01'})
       Patient.all[0].should be_an_instance_of Patient
     end
     it 'adds the patient the the doctors patients array' do
       test_doc = Doctor.new({:name => "Dr. Spock", :specialty_id => 7})
-      test_patient = test_doc.add_patient({:name => "Baby Boy"})
+      test_patient = test_doc.add_patient({:name => "Baby Boy", :birthdate => '1940-01-01'})
       test_doc.patients.should eq [test_patient]
     end
   end
