@@ -35,6 +35,12 @@ class Patient
     DB.exec("DELETE FROM patients WHERE id = #{@id};")
   end
 
+  def modify(attributes)
+    @name =  attributes[:name].nil? ? @name : attributes[:name]
+    @birthdate = attributes[:birthdate].nil? ? @birthdate : attributes[:birthdate]
+    updated = DB.exec("UPDATE patients SET name = '#{@name}' WHERE id = #{@id};")
+  end
+
   def ==(another_patient)
     self.name == another_patient.name && self.id == another_patient.id && self.birthdate == another_patient.birthdate
   end

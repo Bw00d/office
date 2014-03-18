@@ -40,6 +40,20 @@ describe Patient do
     end
   end
 
+  describe '#modify' do
+    it 'updates the name and/or birthdate of a patient' do
+      test_patient = Patient.create({:name => "stacy", :birthdate => '1970-01-01'})
+      test_patient.modify({:name => "Stacy"})
+      test_patient.name.should eq "Stacy"
+      test_patient.birthdate.should eq '1970-01-01'
+    end
+    it 'updates the name and/or birthdate in the database' do
+      test_patient = Patient.create({:name => "ernie", :birthdate => '1970-01-01'})
+      test_patient.modify({:name => "ERNIE"})
+      Patient.all[0].name.should eq "ERNIE"
+    end
+  end
+
   describe '#==' do
     it 'compares two patients to see if they have the same name and id' do
       test_patient1 = Patient.new({:name => "Sylvia", :birthdate => '1940-01-01', :id => 1})
