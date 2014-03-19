@@ -41,7 +41,7 @@ class Patient
     @name =  attributes[:name].nil? ? @name : attributes[:name]
     @birthdate = attributes[:birthdate].nil? ? @birthdate : attributes[:birthdate]
     @doc_id = attributes[:doc_id].nil? ? @doc_id : attributes[:doc_id]
-    updated = DB.exec("UPDATE patients SET name = '#{@name}' WHERE id = #{@id};")
+    updated = DB.exec("UPDATE patients SET name = '#{@name}' WHERE id = #{@id};") # add birthdate and doc_id to this update...
   end
 
   def ==(another_patient)
